@@ -102,12 +102,10 @@ export default function Dashboard() {
 
       <div style={{maxWidth:1380,margin:"0 auto",padding:"24px 36px"}}>
         {/* ── SUMMARY TABLE ──────────────────────── */}
-        <div style={{display:"flex",gap:24,flexWrap:"wrap",borderBottom:`2px solid ${C.ink}`,paddingBottom:16,marginBottom:18}}>
+        <div style={{display:"flex",gap:24,flexWrap:"wrap",paddingBottom:14,marginBottom:0}}>
           {[
             {l:"Reactor Units",v:stats.u},
             {l:"With Headroom",v:stats.hr},
-            {l:"Theor. Addition",v:`${stats.t.toLocaleString()} MWt`},
-            {l:"Elec. Equivalent",v:`≈ ${stats.gwe} GWe`},
             {l:"States",v:stats.s},
             {l:"Clear-Path States",v:stats.cl},
           ].map((s,i)=>(
@@ -116,6 +114,44 @@ export default function Dashboard() {
               <div style={{fontSize:20,fontWeight:700,fontFamily:mono}}>{s.v}</div>
             </div>
           ))}
+        </div>
+        {/* ── ESTIMATE COMPARISON ─────────────────── */}
+        <div style={{border:`2px solid ${C.ink}`,padding:"14px 18px",marginBottom:18}}>
+          <div style={{fontWeight:700,fontVariant:"small-caps",letterSpacing:"0.1em",fontSize:12,marginBottom:10,paddingBottom:6,borderBottom:`1px solid ${C.g30}`}}>
+            Uprate Capacity Estimates — Two Methodologies
+          </div>
+          <div style={{display:"flex",gap:24,flexWrap:"wrap",alignItems:"flex-end"}}>
+            {/* Theoretical max */}
+            <div style={{flex:"1 1 260px"}}>
+              <div style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginBottom:3}}>
+                Theoretical Maximum <span style={{color:C.g50}}>(FAI / DOE Methodology)</span>
+              </div>
+              <div style={{fontSize:22,fontWeight:700,fontFamily:mono,color:C.ink}}>
+                {stats.t.toLocaleString()} <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWt</span>
+                <span style={{fontSize:14,fontWeight:400,color:C.g50,marginLeft:12}}>≈ {stats.gwe} GWe</span>
+              </div>
+              <div style={{height:8,background:C.g15,marginTop:6,position:"relative"}}>
+                <div style={{height:"100%",background:C.blue,width:"100%"}}/>
+              </div>
+            </div>
+            {/* NEI operator plans */}
+            <div style={{flex:"1 1 260px"}}>
+              <div style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginBottom:3}}>
+                Operator-Reported Plans <span style={{color:C.g50}}>(NEI 2024 Survey)</span>
+              </div>
+              <div style={{fontSize:22,fontWeight:700,fontFamily:mono,color:C.green}}>
+                ~3,000 <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWe</span>
+                <span style={{fontSize:14,fontWeight:400,color:C.g50,marginLeft:12}}>≈ 3 GWe by ~2032</span>
+              </div>
+              <div style={{height:8,background:C.g15,marginTop:6,position:"relative"}}>
+                <div style={{height:"100%",background:C.green,width:`${(3/parseFloat(stats.gwe))*100}%`}}/>
+              </div>
+            </div>
+            {/* Gap annotation */}
+            <div style={{flex:"1 1 200px",fontSize:12,fontStyle:"italic",color:C.g70,lineHeight:1.5}}>
+              The gap between these estimates reflects the difference between a top-down theoretical ceiling and bottom-up operator engineering judgment. Actual outcomes will depend on plant-specific BOP constraints, cooling water margins, and economics.
+            </div>
+          </div>
         </div>
 
         {/* ── CONTROLS ───────────────────────────── */}
@@ -290,10 +326,24 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* ── METHODOLOGY NOTE ──────────────────── */}
+        <div style={{border:`2px solid ${C.ink}`,borderLeft:`4px solid ${C.blue}`,padding:"14px 18px",marginTop:20}}>
+          <div style={{fontWeight:700,fontVariant:"small-caps",letterSpacing:"0.1em",fontSize:12,marginBottom:8,paddingBottom:6,borderBottom:`1px solid ${C.g30}`}}>
+            A Note on Methodology
+          </div>
+          <div style={{fontSize:12.5,lineHeight:1.6,color:C.g90,textAlign:"justify",hyphens:"auto"}}>
+            <span style={{fontWeight:700}}>Theoretical Maximum</span> figures use the FAI/DOE methodology (Larsen et al., INL/RPT-23-74681; INL/RPT-24-78810), which estimates remaining uprate headroom by applying the highest historically achieved uprate for each reactor type — capped at 20% — as a uniform ceiling. This approach does not incorporate plant-specific feasibility studies of turbine margins, balance-of-plant constraints, cooling-water capacity, or auxiliary system limitations. As such, it represents an upper bound, not a forecast.
+          </div>
+          <div style={{fontSize:12.5,lineHeight:1.6,color:C.g90,textAlign:"justify",hyphens:"auto",marginTop:8}}>
+            <span style={{fontWeight:700}}>Operator-Reported Plans</span> are drawn from the NEI 2024 Update Survey of 21 utility companies operating 94 units. The survey identified cumulative uprate plans of over 3 GWe through approximately 2032, primarily via MUR uprates and turbine modernization projects. This figure reflects actual engineering and economic judgment at the plant level, but may understate long-term potential due to conservative planning horizons. The DOE Liftoff Report (2024) brackets the range at 2–8 GWe.
+          </div>
+          <div style={{fontSize:11,fontStyle:"italic",color:C.warm,marginTop:10}}>
+            Industry-standard plant-specific feasibility analysis (per NEI-08-10 and EPRI's 2023 Feasibility Study Guideline) requires vendor-led assessment of each unit's NSSS and BOP constraints. Even nominally identical plants may require separate uprate programs. See: IAEA NE Series No. NP-T-3.9 (2011); Westinghouse Uprating Programs Technology; MIT CANES Mega-Uprates Thesis (2014).
+          </div>
+        </div>
         {/* ── FOOTER ─────────────────────────────── */}
         <footer style={{borderTop:`2px solid ${C.ink}`,paddingTop:14,marginTop:20,fontSize:11,color:C.g50,textAlign:"center",fontStyle:"italic"}}>
-          Theoretical uprate caps per FAI/DOE methodology: maximum historically achieved uprate by reactor type, capped at 20%.
-          All additions contingent upon NRC license amendments, plant-specific safety analyses, and economic feasibility.
+          Sources: INL/RPT-24-78810 (2024) · INL/RPT-23-74681 (2023) · FAI State Permitting Playbook Nuclear Supplement (2025) · NEI 2024 Update Survey · DOE Pathways to Commercial Liftoff: Advanced Nuclear (2024) · NRC Approved Applications for Power Uprates.
         </footer>
       </div>
     </div>
