@@ -54,7 +54,7 @@ export default function Dashboard() {
     if(view==="regulatory"&&s){
       return s.env==="Clear"?`${C.green}18`:s.env==="Mixed"?`${C.yellow}18`:`${C.red}18`;
     }
-    return filtered.some(p=>p.state===a)?C.news:"#EAE7DD";
+    return filtered.some(p=>p.state===a)?C.newsprint:"#EAE7DD";
   },[view,filtered]);
 
   const serif = FONTS.serif;
