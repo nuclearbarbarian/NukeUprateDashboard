@@ -66,6 +66,23 @@ export default function Dashboard() {
       background:on?C.ink:"transparent",color:on?C.paper:C.g70,fontFamily:mono,transition:"all 0.1s",letterSpacing:"0.02em"}}>{children}</button>
   );
 
+  const Tooltip = ({text,children})=>(
+    <span style={{position:"relative",display:"inline-block"}}
+      onMouseEnter={e=>e.currentTarget.querySelector(".tt").style.display="block"}
+      onMouseLeave={e=>e.currentTarget.querySelector(".tt").style.display="none"}>
+      {children}
+      <span className="tt" style={{display:"none",position:"absolute",bottom:"calc(100% + 6px)",left:"50%",
+        transform:"translateX(-50%)",width:220,background:C.ink,color:C.newsprint,
+        fontSize:11,lineHeight:1.5,padding:"8px 10px",fontFamily:mono,fontWeight:400,
+        letterSpacing:"0.01em",zIndex:100,pointerEvents:"none",
+        boxShadow:"0 2px 8px rgba(0,0,0,0.3)"}}>
+        {text}
+        <span style={{position:"absolute",top:"100%",left:"50%",transform:"translateX(-50%)",
+          border:"5px solid transparent",borderTopColor:C.ink}}/>
+      </span>
+    </span>
+  );
+
   return (
     <div style={{minHeight:"100vh",background:C.news,color:C.ink,fontFamily:serif}}>
       {/* Global styles are in index.css; font loaded in index.html */}
@@ -105,7 +122,11 @@ export default function Dashboard() {
         <div style={{display:"flex",gap:8,flexWrap:"wrap",alignItems:"center",marginBottom:16}}>
           <span style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginRight:6}}>View</span>
           {["uprate","regulatory"].map(m=>(
-            <Btn key={m} on={view===m} onClick={()=>setView(m)}>{m==="uprate"?"Uprate Potential":"Regulatory"}</Btn>
+            <Btn key={m} on={view===m} onClick={()=>setView(m)}>
+              {m==="uprate"
+                ?<Tooltip text="A power uprate increases a reactor's licensed output beyond its original design capacity — typically 1–20% — by optimizing fuel, instrumentation, or thermal margins.">Uprate Potential</Tooltip>
+                :"Regulatory"}
+            </Btn>
           ))}
           <span style={{width:1,height:20,background:C.g30,margin:"0 8px"}}/>
           <span style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginRight:6}}>Filter</span>
