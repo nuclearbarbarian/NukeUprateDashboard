@@ -121,7 +121,7 @@ export default function Dashboard() {
             {/* Theoretical max */}
             <div style={{flex:"1 1 260px"}}>
               <div style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginBottom:3}}>
-                Theoretical Maximum <span style={{color:C.g50}}>(FAI / DOE Methodology)</span>
+                Theoretical Maximum <span style={{color:C.g50}}>(DOE Methodology)</span>
               </div>
               <div style={{fontSize:22,fontWeight:700,fontFamily:mono,color:C.ink}}>
                 {stats.t.toLocaleString()} <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWt</span>
@@ -329,7 +329,7 @@ export default function Dashboard() {
             A Note on Methodology
           </div>
           <div style={{fontSize:12.5,lineHeight:1.6,color:C.g90,textAlign:"justify",hyphens:"auto"}}>
-            <span style={{fontWeight:700}}>Theoretical Maximum</span> figures use the FAI/DOE methodology (Larsen et al., INL/RPT-23-74681; INL/RPT-24-78810), which estimates remaining uprate headroom by applying the highest historically achieved uprate for each reactor type — capped at 20% — as a uniform ceiling. This approach does not incorporate plant-specific feasibility studies of turbine margins, balance-of-plant constraints, cooling-water capacity, or auxiliary system limitations. As such, it represents an upper bound, not a forecast.
+            <span style={{fontWeight:700}}>Theoretical Maximum</span> figures use the DOE methodology (Larsen et al., INL/RPT-23-74681; INL/RPT-24-78810), which estimates remaining uprate headroom by applying the highest historically achieved uprate for each reactor type — capped at 20% — as a uniform ceiling. This approach does not incorporate plant-specific feasibility studies of turbine margins, balance-of-plant constraints, cooling-water capacity, or auxiliary system limitations. As such, it represents an upper bound, not a forecast.
           </div>
           <div style={{fontSize:12.5,lineHeight:1.6,color:C.g90,textAlign:"justify",hyphens:"auto",marginTop:8}}>
             <span style={{fontWeight:700}}>Operator-Reported Plans</span> are drawn from the NEI 2024 Update Survey of 21 utility companies operating 94 units. The survey identified cumulative uprate plans of over 3 GWe through approximately 2032, primarily via MUR uprates and turbine modernization projects. This figure reflects actual engineering and economic judgment at the plant level, but may understate long-term potential due to conservative planning horizons. The DOE Liftoff Report (2024) brackets the range at 2–8 GWe.
