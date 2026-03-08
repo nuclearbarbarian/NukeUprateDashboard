@@ -141,7 +141,7 @@ export default function Dashboard() {
             <svg viewBox="0 0 960 600" style={{width:"100%",display:"block"}}>
               <rect width="960" height="600" fill={C.paper}/>
               {feats.map((f,i)=><path key={i} d={path(f)||""} fill={gf(f.id)} stroke={C.g30} strokeWidth={0.5}/>)}
-              {sites.map((s,i)=>{
+              {[...sites].sort((a,b)=>b.add-a.add).map((s,i)=>{
                 const c=proj([s.lon,s.lat]); if(!c) return null;
                 const hr=s.add>0, r=hr?3+(s.add/mx)*6.5:2.5;
                 const sd=SD[s.st];
