@@ -95,9 +95,6 @@ export default function Dashboard() {
         <p style={{fontSize:13,fontStyle:"italic",color:C.g30,margin:"0 0 10px"}}>
           Theoretical Capacity Additions for the U.S. Commercial Reactor Fleet
         </p>
-        <p style={{fontFamily:mono,fontSize:10,color:C.g50,letterSpacing:"0.1em",textTransform:"uppercase"}}>
-          INL/RPT-24-78810 &bull; FAI State Permitting Playbook Nuclear Supplement &bull; 2025
-        </p>
       </header>
 
       <div style={{maxWidth:1380,margin:"0 auto",padding:"24px 36px"}}>
