@@ -140,8 +140,8 @@ export default function Dashboard() {
                 ~3,000 <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWe</span>
                 <span style={{fontSize:14,fontWeight:400,color:C.g50,marginLeft:12}}>≈ 3 GWe by ~2032</span>
               </div>
-              <div style={{height:8,background:C.g15,marginTop:6,position:"relative"}}>
-                <div style={{height:"100%",background:C.green,width:`${(3/parseFloat(stats.gwe))*100}%`}}/>
+              <div style={{height:8,background:C.g15,marginTop:6,position:"relative",overflow:"hidden"}}>
+                <div style={{height:"100%",background:C.green,width:`${Math.min((3/parseFloat(stats.gwe))*100,100)}%`}}/>
               </div>
             </div>
             {/* Gap annotation */}
