@@ -164,7 +164,12 @@ export default function Dashboard() {
           <span style={{width:1,height:20,background:C.g30,margin:"0 8px"}}/>
           <span style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginRight:6}}>Filter</span>
           {[{k:"type",o:["All","PWR","BWR"]},{k:"mkt",o:["All","Reg.","Merch."]},{k:"hr",o:["All","Headroom","Maxed"]},{k:"env",o:["All","Clear","Mixed","Restricted"]}].map(({k,o})=>(
-            <div key={k} style={{display:"flex",gap:2}}>{o.map(v=><Btn key={v} on={fil[k]===v} onClick={()=>setFil(f=>({...f,[k]:v}))}>{v}</Btn>)}</div>
+            <div key={k} style={{display:"flex",gap:2}}>{o.map(v=>{
+              const envTips={"Clear":"No major state-level regulatory or political barriers to uprate. Favorable or neutral PUC posture, no active moratoriums.","Mixed":"Mixed signals — some supportive policy but with meaningful hurdles such as partial deregulation conflicts, pending legislation, or contested rate cases.","Restricted":"Significant state-level barriers: active legislative moratoriums, hostile PUC precedent, or explicit bans on new nuclear capacity."};
+              const tip = k==="env" && envTips[v];
+              return tip ? <Tooltip key={v} text={tip}><Btn on={fil[k]===v} onClick={()=>setFil(f=>({...f,[k]:v}))}>{v}</Btn></Tooltip>
+                         : <Btn key={v} on={fil[k]===v} onClick={()=>setFil(f=>({...f,[k]:v}))}>{v}</Btn>;
+            })}</div>
           ))}
         </div>
 
