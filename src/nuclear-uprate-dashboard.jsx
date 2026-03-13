@@ -227,6 +227,7 @@ export default function Dashboard() {
 
       {/* ── HEADER ────────────────────────────────── */}
       <header style={{background:C.ink,color:C.paper,padding:"24px 36px",textAlign:"center"}}>
+        <img src="/nuclear-barbarians-logo.png" alt="Nuclear Barbarians" style={{height:48,marginBottom:12,display:"block",margin:"0 auto 12px"}}/>
         <h1 style={{fontSize:22,fontWeight:700,letterSpacing:"0.06em",textTransform:"uppercase",margin:"0 0 6px",fontFamily:serif}}>
           Nuclear Uprate Opportunity Map
         </h1>
