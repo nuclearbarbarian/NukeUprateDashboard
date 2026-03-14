@@ -88,8 +88,14 @@ export default function Dashboard() {
       {/* Global styles are in index.css; font loaded in index.html */}
 
       {/* ── HEADER ────────────────────────────────── */}
+      <style>{`.logo-tip:hover .logo-tooltip{display:block!important}`}</style>
       <header style={{background:C.ink,color:C.paper,padding:"24px 36px",textAlign:"center"}}>
-        <img src={`${import.meta.env.BASE_URL}nuclear-barbarians-logo.png`} alt="Nuclear Barbarians" style={{height:48,display:"block",margin:"0 auto 12px"}}/>
+        <div className="logo-tip" style={{display:"inline-block",position:"relative",cursor:"pointer",margin:"0 auto 12px"}}>
+          <img src={`${import.meta.env.BASE_URL}nuclear-barbarians-logo.png`} alt="Nuclear Barbarians" style={{height:48,display:"block"}}/>
+          <div className="logo-tooltip" style={{display:"none",position:"absolute",top:"calc(100% + 8px)",left:"50%",transform:"translateX(-50%)",width:300,background:C.newsprint,color:C.ink,border:`2px solid ${C.g30}`,padding:"12px 14px",zIndex:100,fontSize:12,lineHeight:1.6,fontFamily:serif,textAlign:"left",boxShadow:"0 2px 8px rgba(0,0,0,0.3)"}}>
+            This is a Nuclear Barbarians project, which is part of the Foundation for American Innovation. To support this project and others like it, <a href="https://www.thefai.org/donate" target="_blank" rel="noreferrer" style={{color:C.blue,fontWeight:700}}>click here</a>.
+          </div>
+        </div>
         <h1 style={{fontSize:22,fontWeight:700,letterSpacing:"0.06em",textTransform:"uppercase",margin:"0 0 6px",fontFamily:serif}}>
           Nuclear Uprate Opportunity Map
         </h1>
