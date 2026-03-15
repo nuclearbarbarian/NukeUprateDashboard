@@ -127,11 +127,11 @@ export default function Dashboard() {
         {/* ── ESTIMATE COMPARISON ─────────────────── */}
         <div style={{border:`2px solid ${C.ink}`,padding:"14px 18px",marginBottom:18}}>
           <div style={{fontWeight:700,fontVariant:"small-caps",letterSpacing:"0.1em",fontSize:12,marginBottom:10,paddingBottom:6,borderBottom:`1px solid ${C.g30}`}}>
-            Uprate Capacity Estimates — Two Methodologies
+            Uprate Capacity Estimates — Three Reference Points
           </div>
           <div style={{display:"flex",gap:24,flexWrap:"wrap",alignItems:"flex-end"}}>
             {/* Theoretical max */}
-            <div style={{flex:"1 1 260px"}}>
+            <div style={{flex:"1 1 200px"}}>
               <div style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginBottom:3}}>
                 Theoretical Maximum <span style={{color:C.g50}}>(DOE Methodology)</span>
               </div>
@@ -144,21 +144,36 @@ export default function Dashboard() {
               </div>
             </div>
             {/* NEI operator plans */}
-            <div style={{flex:"1 1 260px"}}>
+            <div style={{flex:"1 1 200px"}}>
               <div style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginBottom:3}}>
-                Operator-Reported Plans <span style={{color:C.g50}}>(NEI 2024 Survey)</span>
+                Operator-Reported Plans <span style={{color:C.g50}}>(NEI 2025 Survey)</span>
               </div>
               <div style={{fontSize:22,fontWeight:700,fontFamily:mono,color:C.green}}>
-                ~3,000 <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWe</span>
-                <span style={{fontSize:14,fontWeight:400,color:C.g50,marginLeft:12}}>≈ 3 GWe by ~2032</span>
+                ~8,000 <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWe</span>
+                <span style={{fontSize:14,fontWeight:400,color:C.g50,marginLeft:12}}>≈ 8 GWe this decade</span>
               </div>
-              <div style={{height:8,background:C.g15,marginTop:6,position:"relative",overflow:"hidden"}}>
-                <div style={{height:"100%",background:C.green,width:`${Math.min((3/parseFloat(stats.gwe))*100,100)}%`}}/>
+              <div style={{fontSize:10,fontStyle:"italic",color:C.g50,marginTop:3}}>Includes restarts &amp; fuel-cycle extensions</div>
+              <div style={{height:8,background:C.g15,marginTop:6,position:"relative",overflow:"visible"}}>
+                <div style={{height:"100%",background:C.green,width:`${Math.min((8/parseFloat(stats.gwe))*100,100)}%`}}/>
               </div>
             </div>
-            {/* Gap annotation */}
-            <div style={{flex:"1 1 200px",fontSize:12,fontStyle:"italic",color:C.g70,lineHeight:1.5}}>
-              The gap between these estimates reflects the difference between a top-down theoretical ceiling and bottom-up operator engineering judgment. Actual outcomes will depend on plant-specific BOP constraints, cooling water margins, and economics.
+            {/* UPRISE */}
+            <div style={{flex:"1 1 200px"}}>
+              <div style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginBottom:3}}>
+                DOE UPRISE Target <span style={{color:C.g50}}>(Federal Program)</span>
+              </div>
+              <div style={{fontSize:22,fontWeight:700,fontFamily:mono,color:"#8B4513"}}>
+                5,000 <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWe</span>
+                <span style={{fontSize:14,fontWeight:400,color:C.g50,marginLeft:12}}>5 GW by 2029</span>
+              </div>
+              <div style={{fontSize:10,fontStyle:"italic",color:C.g50,marginTop:3}}>Uprates &amp; restarts; DOE-funded initiative</div>
+              <div style={{height:8,background:C.g15,marginTop:6,position:"relative",overflow:"hidden"}}>
+                <div style={{height:"100%",background:"#8B4513",width:`${Math.min((5/parseFloat(stats.gwe))*100,100)}%`}}/>
+              </div>
+            </div>
+            {/* Annotation */}
+            <div style={{flex:"1 1 180px",fontSize:12,fontStyle:"italic",color:C.g70,lineHeight:1.5}}>
+              The NEI 2025 figure exceeds the uprate-only theoretical ceiling because it includes restarts (Palisades ~800 MWe, Crane ~800 MWe) and efficiency gains outside the FAI/DOE uprate-only methodology.
             </div>
           </div>
         </div>
@@ -349,7 +364,7 @@ export default function Dashboard() {
             <span style={{fontWeight:700}}>Theoretical Maximum</span> figures use the DOE methodology (Larsen et al., INL/RPT-23-74681; INL/RPT-24-78810), which estimates remaining uprate headroom by applying the highest historically achieved uprate for each reactor type — capped at 20% — as a uniform ceiling. This approach does not incorporate plant-specific feasibility studies of turbine margins, balance-of-plant constraints, cooling-water capacity, or auxiliary system limitations. As such, it represents an upper bound, not a forecast.
           </div>
           <div style={{fontSize:12.5,lineHeight:1.6,color:C.g90,textAlign:"justify",hyphens:"auto",marginTop:8}}>
-            <span style={{fontWeight:700}}>Operator-Reported Plans</span> are drawn from the NEI 2024 Update Survey of 21 utility companies operating 94 units. The survey identified cumulative uprate plans of over 3 GWe through approximately 2032, primarily via MUR uprates and turbine modernization projects. This figure reflects actual engineering and economic judgment at the plant level, but may understate long-term potential due to conservative planning horizons. The DOE Liftoff Report (2024) brackets the range at 2–8 GWe.
+            <span style={{fontWeight:700}}>Operator-Reported Plans</span> are drawn from the NEI 2025 Survey, which identified approximately 8 GWe of capacity additions this decade. Unlike the DOE uprate-only methodology, this figure includes plant restarts (e.g., Palisades ~800 MWe, Crane ~800 MWe) and fuel-cycle efficiency extensions in addition to traditional uprates, which is why it exceeds the FAI/DOE theoretical uprate ceiling. The DOE <span style={{fontWeight:700}}>UPRISE program</span> separately targets 5 GW of uprates and restarts by 2029 through federal cost-sharing and streamlined licensing support.
           </div>
           <div style={{fontSize:11,fontStyle:"italic",color:C.warm,marginTop:10}}>
             Industry-standard plant-specific feasibility analysis (per NEI-08-10 and EPRI's 2023 Feasibility Study Guideline) requires vendor-led assessment of each unit's NSSS and BOP constraints. Even nominally identical plants may require separate uprate programs. See: IAEA NE Series No. NP-T-3.9 (2011); Westinghouse Uprating Programs Technology; MIT CANES Mega-Uprates Thesis (2014).
@@ -357,7 +372,7 @@ export default function Dashboard() {
         </div>
         {/* ── FOOTER ─────────────────────────────── */}
         <footer style={{borderTop:`2px solid ${C.ink}`,paddingTop:14,marginTop:20,fontSize:11,color:C.g50,textAlign:"center",fontStyle:"italic"}}>
-          Sources: INL/RPT-24-78810 (2024) · INL/RPT-23-74681 (2023) · FAI State Permitting Playbook Nuclear Supplement (2025) · NEI 2024 Update Survey · DOE Pathways to Commercial Liftoff: Advanced Nuclear (2024) · NRC Approved Applications for Power Uprates.
+          Sources: INL/RPT-24-78810 (2024) · INL/RPT-23-74681 (2023) · FAI State Permitting Playbook Nuclear Supplement (2025) · NEI 2025 Survey · DOE Pathways to Commercial Liftoff: Advanced Nuclear (2024) · DOE UPRISE Program · NRC Approved Applications for Power Uprates.
         </footer>
       </div>
     </div>
