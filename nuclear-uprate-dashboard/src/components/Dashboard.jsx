@@ -95,8 +95,11 @@ export default function Dashboard() {
           <h1 style={{fontSize:22,fontWeight:700,letterSpacing:"0.06em",textTransform:"uppercase",margin:"0 0 6px",fontFamily:serif}}>
             Nuclear Uprate Opportunity Map
           </h1>
-          <p style={{fontSize:13,fontStyle:"italic",color:C.g30,margin:"0 0 10px"}}>
+          <p style={{fontSize:13,fontStyle:"italic",color:C.g30,margin:"0 0 6px"}}>
             Theoretical Capacity Additions for the U.S. Commercial Reactor Fleet
+          </p>
+          <p style={{fontFamily:mono,fontSize:10,color:C.g50,letterSpacing:"0.08em",textTransform:"uppercase",margin:0}}>
+            Last updated: {__BUILD_DATE__}
           </p>
         </div>
         <div style={{flex:1,display:"flex",justifyContent:"flex-end"}}>
@@ -127,22 +130,9 @@ export default function Dashboard() {
         {/* ── ESTIMATE COMPARISON ─────────────────── */}
         <div style={{border:`2px solid ${C.ink}`,padding:"14px 18px",marginBottom:18}}>
           <div style={{fontWeight:700,fontVariant:"small-caps",letterSpacing:"0.1em",fontSize:12,marginBottom:10,paddingBottom:6,borderBottom:`1px solid ${C.g30}`}}>
-            Uprate Capacity Estimates — Three Reference Points
+            Uprate Capacity Estimates — Two Reference Points
           </div>
           <div style={{display:"flex",gap:24,flexWrap:"wrap",alignItems:"flex-end"}}>
-            {/* Theoretical max */}
-            <div style={{flex:"1 1 200px"}}>
-              <div style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginBottom:3}}>
-                Theoretical Maximum <span style={{color:C.g50}}>(DOE Methodology)</span>
-              </div>
-              <div style={{fontSize:22,fontWeight:700,fontFamily:mono,color:C.ink}}>
-                {stats.t.toLocaleString()} <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWt</span>
-                <span style={{fontSize:14,fontWeight:400,color:C.g50,marginLeft:12}}>≈ {stats.gwe} GWe</span>
-              </div>
-              <div style={{height:8,background:C.g15,marginTop:6,position:"relative"}}>
-                <div style={{height:"100%",background:C.blue,width:"100%"}}/>
-              </div>
-            </div>
             {/* NEI operator plans */}
             <div style={{flex:"1 1 200px"}}>
               <div style={{fontFamily:mono,fontSize:10,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginBottom:3}}>
@@ -173,7 +163,7 @@ export default function Dashboard() {
             </div>
             {/* Annotation */}
             <div style={{flex:"1 1 180px",fontSize:12,fontStyle:"italic",color:C.g70,lineHeight:1.5}}>
-              The NEI 2025 figure exceeds the uprate-only theoretical ceiling because it includes restarts (Palisades ~800 MWe, Crane ~800 MWe) and efficiency gains outside the FAI/DOE uprate-only methodology.
+              The NEI 2025 figure includes restarts (Palisades ~800 MWe, Crane ~800 MWe) and fuel-cycle extensions alongside traditional uprates. The UPRISE target reflects a federal cost-share program focused specifically on uprates and restarts by 2029.
             </div>
           </div>
         </div>
@@ -361,10 +351,7 @@ export default function Dashboard() {
             A Note on Methodology
           </div>
           <div style={{fontSize:12.5,lineHeight:1.6,color:C.g90,textAlign:"justify",hyphens:"auto"}}>
-            <span style={{fontWeight:700}}>Theoretical Maximum</span> figures use the DOE methodology (Larsen et al., INL/RPT-23-74681; INL/RPT-24-78810), which estimates remaining uprate headroom by applying the highest historically achieved uprate for each reactor type — capped at 20% — as a uniform ceiling. This approach does not incorporate plant-specific feasibility studies of turbine margins, balance-of-plant constraints, cooling-water capacity, or auxiliary system limitations. As such, it represents an upper bound, not a forecast.
-          </div>
-          <div style={{fontSize:12.5,lineHeight:1.6,color:C.g90,textAlign:"justify",hyphens:"auto",marginTop:8}}>
-            <span style={{fontWeight:700}}>Operator-Reported Plans</span> are drawn from the NEI 2025 Survey, which identified approximately 8 GWe of capacity additions this decade. Unlike the DOE uprate-only methodology, this figure includes plant restarts (e.g., Palisades ~800 MWe, Crane ~800 MWe) and fuel-cycle efficiency extensions in addition to traditional uprates, which is why it exceeds the FAI/DOE theoretical uprate ceiling. The DOE <span style={{fontWeight:700}}>UPRISE program</span> separately targets 5 GW of uprates and restarts by 2029 through federal cost-sharing and streamlined licensing support.
+            <span style={{fontWeight:700}}>Operator-Reported Plans</span> are drawn from the NEI 2025 Survey, which identified approximately 8 GWe of capacity additions this decade. This figure includes plant restarts (e.g., Palisades ~800 MWe, Crane ~800 MWe) and fuel-cycle efficiency extensions alongside traditional uprates — it is a broader measure of fleet capacity growth, not uprates alone. The <span style={{fontWeight:700}}>DOE UPRISE program</span> separately targets 5 GW of uprates and restarts by 2029 through federal cost-sharing and streamlined licensing support. The plant-level uprate headroom shown on the map is estimated using the DOE methodology (Larsen et al., INL/RPT-23-74681; INL/RPT-24-78810), which applies the highest historically achieved uprate per reactor type as a uniform ceiling — an upper bound, not a forecast.
           </div>
           <div style={{fontSize:11,fontStyle:"italic",color:C.warm,marginTop:10}}>
             Industry-standard plant-specific feasibility analysis (per NEI-08-10 and EPRI's 2023 Feasibility Study Guideline) requires vendor-led assessment of each unit's NSSS and BOP constraints. Even nominally identical plants may require separate uprate programs. See: IAEA NE Series No. NP-T-3.9 (2011); Westinghouse Uprating Programs Technology; MIT CANES Mega-Uprates Thesis (2014).
