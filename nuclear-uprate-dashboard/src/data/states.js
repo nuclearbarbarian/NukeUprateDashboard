@@ -16,7 +16,7 @@ export const STATE_REGULATORY = {
   AR: { mor: "None",                      waste: "None",                          env: "Clear",      sepa: false },
   AZ: { mor: "None",                      waste: "None",                          env: "Clear",      sepa: false },
   CA: { mor: "HLW Repository Req.",       waste: "None",                          env: "Restricted", sepa: true  },
-  CT: { mor: "HLW Repository Req.",       waste: "None",                          env: "Restricted", sepa: true  },
+  CT: { mor: "HLW Repository Req.",       waste: "None",                          env: "Mixed",      sepa: true  },
   FL: { mor: "None",                      waste: "None",                          env: "Clear",      sepa: false },
   GA: { mor: "None",                      waste: "None",                          env: "Clear",      sepa: false },
   IL: { mor: "Repealed",                  waste: "None",                          env: "Clear",      sepa: false },

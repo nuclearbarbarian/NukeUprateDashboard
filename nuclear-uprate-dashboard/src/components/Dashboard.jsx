@@ -139,13 +139,10 @@ export default function Dashboard() {
                 Operator-Reported Plans <span style={{color:C.g50}}>(NEI 2025 Survey)</span>
               </div>
               <div style={{fontSize:22,fontWeight:700,fontFamily:mono,color:C.green}}>
-                ~8,000 <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWe</span>
+                ~8,000 <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWe (electric)</span>
                 <span style={{fontSize:14,fontWeight:400,color:C.g50,marginLeft:12}}>≈ 8 GWe this decade</span>
               </div>
               <div style={{fontSize:10,fontStyle:"italic",color:C.g50,marginTop:3}}>Includes restarts &amp; fuel-cycle extensions</div>
-              <div style={{height:8,background:C.g15,marginTop:6,position:"relative",overflow:"visible"}}>
-                <div style={{height:"100%",background:C.green,width:`${Math.min((8/parseFloat(stats.gwe))*100,100)}%`}}/>
-              </div>
             </div>
             {/* UPRISE */}
             <div style={{flex:"1 1 200px"}}>
@@ -153,17 +150,14 @@ export default function Dashboard() {
                 DOE UPRISE Target <span style={{color:C.g50}}>(Federal Program)</span>
               </div>
               <div style={{fontSize:22,fontWeight:700,fontFamily:mono,color:"#8B4513"}}>
-                5,000 <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWe</span>
+                5,000 <span style={{fontSize:12,fontWeight:400,color:C.g70}}>MWe (electric)</span>
                 <span style={{fontSize:14,fontWeight:400,color:C.g50,marginLeft:12}}>5 GW by 2029</span>
               </div>
-              <div style={{fontSize:10,fontStyle:"italic",color:C.g50,marginTop:3}}>Uprates &amp; restarts; DOE-funded initiative</div>
-              <div style={{height:8,background:C.g15,marginTop:6,position:"relative",overflow:"hidden"}}>
-                <div style={{height:"100%",background:"#8B4513",width:`${Math.min((5/parseFloat(stats.gwe))*100,100)}%`}}/>
-              </div>
+              <div style={{fontSize:10,fontStyle:"italic",color:C.g50,marginTop:3}}>Stated program target; uprates &amp; restarts, DOE-funded</div>
             </div>
             {/* Annotation */}
             <div style={{flex:"1 1 180px",fontSize:12,fontStyle:"italic",color:C.g70,lineHeight:1.5}}>
-              The NEI 2025 figure includes restarts (Palisades ~800 MWe, Crane ~800 MWe) and fuel-cycle extensions alongside traditional uprates. The UPRISE target reflects a federal cost-share program focused specifically on uprates and restarts by 2029.
+              The NEI 2025 figure includes restarts (Palisades ~800 MWe, Crane ~800 MWe) and fuel-cycle extensions alongside traditional uprates. The UPRISE target reflects a federal cost-share program focused specifically on uprates and restarts by 2029. These figures are not additive — UPRISE draws from the same project pool as operator-reported plans.
             </div>
           </div>
         </div>
@@ -351,7 +345,7 @@ export default function Dashboard() {
             A Note on Methodology
           </div>
           <div style={{fontSize:12.5,lineHeight:1.6,color:C.g90,textAlign:"justify",hyphens:"auto"}}>
-            <span style={{fontWeight:700}}>Operator-Reported Plans</span> are drawn from the NEI 2025 Survey, which identified approximately 8 GWe of capacity additions this decade. This figure includes plant restarts (e.g., Palisades ~800 MWe, Crane ~800 MWe) and fuel-cycle efficiency extensions alongside traditional uprates — it is a broader measure of fleet capacity growth, not uprates alone. The <span style={{fontWeight:700}}>DOE UPRISE program</span> separately targets 5 GW of uprates and restarts by 2029 through federal cost-sharing and streamlined licensing support. The plant-level uprate headroom shown on the map is estimated using the DOE methodology (Larsen et al., INL/RPT-23-74681; INL/RPT-24-78810), which applies the highest historically achieved uprate per reactor type as a uniform ceiling — an upper bound, not a forecast.
+            <span style={{fontWeight:700}}>Operator-Reported Plans</span> are drawn from NEI's 2025 capacity survey, which identified approximately 8 GWe of additions this decade. This figure includes plant restarts (e.g., Palisades ~800 MWe electric, Crane ~835 MWe electric) and fuel-cycle efficiency extensions alongside traditional uprates — it is a broader measure of fleet capacity growth, not uprates alone. All reference-box figures are in MWe (electric output); plant-level headroom on the map is in MWt (thermal), reflecting the DOE source methodology. The <span style={{fontWeight:700}}>DOE UPRISE program</span> separately targets 5 GW of uprates and restarts by 2029 through federal cost-sharing and streamlined licensing support; this is the program's stated target, not a modeled forecast. The plant-level uprate headroom shown on the map is estimated using the DOE methodology (Larsen et al., INL/RPT-23-74681; INL/RPT-24-78810), which applies the highest historically achieved uprate per reactor type as a uniform ceiling — an upper bound, not a forecast. <span style={{fontWeight:700}}>State regulatory classifications</span> reflect conditions as of the FAI Playbook (Nov 2025). California is classified Restricted on the basis of its statutory HLW repository requirement, which remains in force notwithstanding the 2023 Diablo Canyon license extension.
           </div>
           <div style={{fontSize:11,fontStyle:"italic",color:C.warm,marginTop:10}}>
             Industry-standard plant-specific feasibility analysis (per NEI-08-10 and EPRI's 2023 Feasibility Study Guideline) requires vendor-led assessment of each unit's NSSS and BOP constraints. Even nominally identical plants may require separate uprate programs. See: IAEA NE Series No. NP-T-3.9 (2011); Westinghouse Uprating Programs Technology; MIT CANES Mega-Uprates Thesis (2014).
