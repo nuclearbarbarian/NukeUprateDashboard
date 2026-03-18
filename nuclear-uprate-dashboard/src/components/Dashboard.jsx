@@ -312,7 +312,14 @@ export default function Dashboard() {
 
                 {/* Details */}
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8}}>
-                  {[{l:"Reactor Type",v:sel.type},{l:"NSSS Design",v:sel.lp},{l:"Market",v:sel.mkt},{l:"Max Uprate Cap",v:`${(sel.cap*100).toFixed(0)}%`},{l:"State SEPA",v:sd?.sepa?"Yes":"No",tip:"State Environmental Policy Act — a state-level equivalent of federal NEPA. States with a SEPA may require environmental impact review for uprate projects, adding time and cost to the permitting process."},{l:"Cycle",v:sel.type==="BWR"?"Direct":"Indirect"}].map((d,i)=>(
+                  {[
+                    {l:"Reactor Type",v:sel.type,hdr:"Reactor Type",tip:"PWRs (Pressurized Water Reactors) keep coolant under high pressure to prevent boiling; heat transfers to a secondary steam loop via steam generators. BWRs (Boiling Water Reactors) boil water directly in the reactor vessel to drive the turbine. The U.S. fleet is roughly 65% PWR and 35% BWR."},
+                    {l:"NSSS Design",v:sel.lp,hdr:"Nuclear Steam Supply System",tip:"The core reactor design from the original vendor. Common vendors include Westinghouse (W), GE, Combustion Engineering (CE), and Babcock & Wilcox (B&W). Uprate feasibility and available vendor engineering support depend partly on the original NSSS design."},
+                    {l:"Market",v:sel.mkt,hdr:"Market Structure",tip:"Regulated plants operate under cost-of-service rate cases — utilities recover uprate costs through rate increases approved by state PUCs. Merchant plants sell power at market prices; uprate returns depend on energy market conditions and capacity revenues."},
+                    {l:"Max Uprate Cap",v:`${(sel.cap*100).toFixed(0)}%`,hdr:"Maximum Uprate Cap",tip:"The NRC's regulatory ceiling on thermal power uprates for this reactor class. Extended Power Uprates (EPUs) can approach this limit. Measurement Uncertainty Recapture (MUR) uprates are typically 1–2% and require minimal new licensing work."},
+                    {l:"State SEPA",v:sd?.sepa?"Yes":"No",hdr:"State Environmental Policy Act",tip:"A state-level equivalent of federal NEPA. States with a SEPA may require environmental impact review for uprate projects, adding time and cost to the permitting process."},
+                    {l:"Cycle",v:sel.type==="BWR"?"Direct":"Indirect",hdr:"Steam Cycle",tip:"BWRs use a direct cycle — reactor-generated steam drives the turbine directly. PWRs use an indirect cycle — heat transfers through steam generators to a secondary loop. Uprates on indirect-cycle plants may require steam generator modifications."},
+                  ].map((d,i)=>(
                     <div key={i} style={{padding:"8px 10px",background:C.news,border:`1px solid ${C.g30}`,position:"relative",cursor:d.tip?"help":"default"}}
                       className={d.tip?"sepa-tip":""}>
                       <div style={{fontFamily:mono,fontSize:9,textTransform:"uppercase",letterSpacing:"0.1em",color:C.warm,marginBottom:2}}>
@@ -322,7 +329,7 @@ export default function Dashboard() {
                       {d.tip&&<div className="sepa-tooltip" style={{display:"none",position:"absolute",bottom:"calc(100% + 6px)",left:"50%",transform:"translateX(-50%)",width:260,
                         background:C.paper,border:`2px solid ${C.ink}`,padding:"10px 12px",zIndex:20,fontSize:12,fontWeight:400,
                         lineHeight:1.5,fontFamily:serif,color:C.g90}}>
-                        <div style={{fontFamily:mono,fontSize:9,textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:700,marginBottom:4,color:C.ink}}>State Environmental Policy Act</div>
+                        <div style={{fontFamily:mono,fontSize:9,textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:700,marginBottom:4,color:C.ink}}>{d.hdr}</div>
                         {d.tip}
                         <div style={{position:"absolute",bottom:-6,left:"50%",marginLeft:-5,width:10,height:10,background:C.paper,borderRight:`2px solid ${C.ink}`,borderBottom:`2px solid ${C.ink}`,transform:"rotate(45deg)"}}/>
                       </div>}
