@@ -252,7 +252,7 @@ export default function Dashboard() {
           </div>
 
           {/* ── DETAIL PANEL ─────────────────────── */}
-          <div style={{flex:"0 0 320px",maxHeight:560,overflowY:"auto",background:C.paper,border:`1px solid ${C.g30}`}}>
+          <div style={{flex:"0 0 320px",background:C.paper,border:`1px solid ${C.g30}`,overflow:"visible"}}>
             {sel?(()=>{
               const sd=SD[sel.state], sp=PLANTS.filter(p=>p.lat===sel.lat&&p.lon===sel.lon);
               const sa=sp.reduce((s,p)=>s+p.add,0), sr=sp.reduce((s,p)=>s+p.ref,0);
