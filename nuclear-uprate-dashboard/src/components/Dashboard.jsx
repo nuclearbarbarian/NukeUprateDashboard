@@ -319,12 +319,12 @@ export default function Dashboard() {
                         {d.l}{d.tip&&<span style={{marginLeft:4,color:C.g50}}>(?)</span>}
                       </div>
                       <div style={{fontSize:14,fontWeight:700}}>{d.v}</div>
-                      {d.tip&&<div className="sepa-tooltip" style={{display:"none",position:"absolute",bottom:"calc(100% + 6px)",left:0,right:-40,
+                      {d.tip&&<div className="sepa-tooltip" style={{display:"none",position:"absolute",bottom:"calc(100% + 6px)",left:"50%",transform:"translateX(-50%)",width:260,
                         background:C.paper,border:`2px solid ${C.ink}`,padding:"10px 12px",zIndex:20,fontSize:12,fontWeight:400,
                         lineHeight:1.5,fontFamily:serif,color:C.g90}}>
                         <div style={{fontFamily:mono,fontSize:9,textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:700,marginBottom:4,color:C.ink}}>State Environmental Policy Act</div>
                         {d.tip}
-                        <div style={{position:"absolute",bottom:-6,left:16,width:10,height:10,background:C.paper,borderRight:`2px solid ${C.ink}`,borderBottom:`2px solid ${C.ink}`,transform:"rotate(45deg)"}}/>
+                        <div style={{position:"absolute",bottom:-6,left:"50%",marginLeft:-5,width:10,height:10,background:C.paper,borderRight:`2px solid ${C.ink}`,borderBottom:`2px solid ${C.ink}`,transform:"rotate(45deg)"}}/>
                       </div>}
                     </div>
                   ))}
