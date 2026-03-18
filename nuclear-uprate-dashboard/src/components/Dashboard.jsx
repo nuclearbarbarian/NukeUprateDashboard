@@ -381,7 +381,7 @@ export default function Dashboard() {
         </div>
         {/* ── FOOTER ─────────────────────────────── */}
         <footer style={{borderTop:`2px solid ${C.ink}`,paddingTop:14,marginTop:20,fontSize:11,color:C.g50,textAlign:"center",fontStyle:"italic"}}>
-          Sources: INL/RPT-24-78810 (2024) · INL/RPT-23-74681 (2023) · FAI State Permitting Playbook Nuclear Supplement (2025) · NEI 2025 Survey · DOE Pathways to Commercial Liftoff: Advanced Nuclear (2024) · DOE UPRISE Program · NRC Approved Applications for Power Uprates.
+          Sources: INL/RPT-24-78810 (2024) · INL/RPT-23-74681 (2023) · FAI State Permitting Playbook Nuclear Supplement (2025) · NEI 2025 Survey · DOE Pathways to Commercial Liftoff: Advanced Nuclear (2024) · DOE UPRISE Program · NRC Approved Applications for Power Uprates · NRC Power Reactor Status Report · 42 U.S.C. § 4321 (NEPA); NUREG-1748 · EIA Electric Power Annual.
         </footer>
       </div>
     </div>
