@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [fil, setFil] = useState({env:"All",type:"All",mkt:"All",hr:"All"});
   const [view, setView] = useState("uprate");
   const [mapEl, setMapEl] = useState(null);
-  const [mapW, setMapW] = useState(960);
+  const [mapW, setMapW] = useState(()=>typeof window!=="undefined"?Math.min(window.innerWidth-30,960):960);
 
   const proj = useMemo(()=>d3.geoAlbersUsa().scale(1080).translate([476,296]),[]);
   const path = useMemo(()=>d3.geoPath().projection(proj),[proj]);
