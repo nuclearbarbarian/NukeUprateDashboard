@@ -99,14 +99,15 @@ export default function Dashboard() {
         .logo-tip:hover .logo-tooltip{display:block!important}
         @media(max-width:600px){
           .main-pad{padding:16px 14px!important}
-          .header-pad{padding:16px 14px!important}
-          .header-logo{height:36px!important}
-          .header-title{font-size:16px!important}
+          .header-pad{padding:14px 14px!important}
+          .header-logo{height:32px!important}
+          .header-spacer{display:none!important}
+          .header-center{flex:1 1 0!important;min-width:0!important}
         }
       `}</style>
       <header className="header-pad" style={{background:C.ink,color:C.paper,padding:"24px 36px",display:"flex",alignItems:"center"}}>
-        <div style={{flex:1}}/>
-        <div style={{textAlign:"center"}}>
+        <div className="header-spacer" style={{flex:1}}/>
+        <div className="header-center" style={{textAlign:"center"}}>
           <h1 style={{fontSize:22,fontWeight:700,letterSpacing:"0.06em",textTransform:"uppercase",margin:"0 0 6px",fontFamily:serif}}>
             Nuclear Uprate Opportunity Map
           </h1>
