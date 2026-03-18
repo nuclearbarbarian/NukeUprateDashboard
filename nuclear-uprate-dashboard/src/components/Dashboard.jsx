@@ -88,8 +88,16 @@ export default function Dashboard() {
       {/* Global styles are in index.css; font loaded in index.html */}
 
       {/* ── HEADER ────────────────────────────────── */}
-      <style>{`.logo-tip:hover .logo-tooltip{display:block!important}`}</style>
-      <header style={{background:C.ink,color:C.paper,padding:"24px 36px",display:"flex",alignItems:"center"}}>
+      <style>{`
+        .logo-tip:hover .logo-tooltip{display:block!important}
+        @media(max-width:600px){
+          .main-pad{padding:16px 14px!important}
+          .header-pad{padding:16px 14px!important}
+          .header-logo{height:36px!important}
+          .header-title{font-size:16px!important}
+        }
+      `}</style>
+      <header className="header-pad" style={{background:C.ink,color:C.paper,padding:"24px 36px",display:"flex",alignItems:"center"}}>
         <div style={{flex:1}}/>
         <div style={{textAlign:"center"}}>
           <h1 style={{fontSize:22,fontWeight:700,letterSpacing:"0.06em",textTransform:"uppercase",margin:"0 0 6px",fontFamily:serif}}>
@@ -104,7 +112,7 @@ export default function Dashboard() {
         </div>
         <div style={{flex:1,display:"flex",justifyContent:"flex-end"}}>
           <div className="logo-tip" style={{display:"inline-block",position:"relative",cursor:"pointer"}}>
-            <img src={`${import.meta.env.BASE_URL}nuclear-barbarians-logo.png`} alt="Nuclear Barbarians" style={{height:48,display:"block"}}/>
+            <img src={`${import.meta.env.BASE_URL}nuclear-barbarians-logo.png`} alt="Nuclear Barbarians" className="header-logo" style={{height:48,display:"block"}}/>
             <div className="logo-tooltip" style={{display:"none",position:"absolute",top:"calc(100% + 8px)",right:0,width:300,background:C.newsprint,color:C.ink,border:`2px solid ${C.g30}`,padding:"12px 14px",zIndex:100,fontSize:12,lineHeight:1.6,fontFamily:serif,textAlign:"left",boxShadow:"0 2px 8px rgba(0,0,0,0.3)"}}>
               This is a <a href="https://www.nuclearbarbarians.com/" target="_blank" rel="noreferrer" style={{color:C.blue,fontWeight:700}}>Nuclear Barbarians</a> project, which is part of the Foundation for American Innovation. To support this project and others like it, <a href="https://www.thefai.org/donate" target="_blank" rel="noreferrer" style={{color:C.blue,fontWeight:700}}>click here</a>.
             </div>
@@ -112,7 +120,7 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <div style={{maxWidth:1380,margin:"0 auto",padding:"24px 36px"}}>
+      <div className="main-pad" style={{maxWidth:1380,margin:"0 auto",padding:"24px 36px"}}>
         {/* ── SUMMARY TABLE ──────────────────────── */}
         <div style={{display:"flex",gap:24,flexWrap:"wrap",paddingBottom:14,marginBottom:0}}>
           {[
@@ -186,7 +194,7 @@ export default function Dashboard() {
 
         {/* ── MAP + PANEL ────────────────────────── */}
         <div style={{display:"flex",gap:24,flexWrap:"wrap"}}>
-          <div ref={setMapEl} style={{flex:"1 1 680px",background:C.paper,border:`1px solid ${C.g30}`,position:"relative",overflow:"hidden"}}>
+          <div ref={setMapEl} style={{flex:"1 1 300px",background:C.paper,border:`1px solid ${C.g30}`,position:"relative",overflow:"visible"}}>
             <svg viewBox="0 0 960 600" style={{width:"100%",display:"block"}}>
               <rect width="960" height="600" fill={C.paper}/>
               {feats.map((f,i)=><path key={i} d={path(f)||""} fill={gf(f.id)} stroke={C.g30} strokeWidth={0.5}/>)}
