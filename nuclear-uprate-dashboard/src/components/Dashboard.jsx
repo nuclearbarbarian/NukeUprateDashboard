@@ -195,7 +195,8 @@ export default function Dashboard() {
         {/* ── MAP + PANEL ────────────────────────── */}
         <div style={{display:"flex",gap:24,flexWrap:"wrap"}}>
           <div ref={setMapEl} style={{flex:"1 1 300px",background:C.paper,border:`1px solid ${C.g30}`,position:"relative",overflow:"visible"}}>
-            <svg viewBox="0 0 960 600" style={{width:"100%",display:"block"}}>
+            <div style={{position:"relative",paddingBottom:"62.5%",height:0}}>
+            <svg viewBox="0 0 960 600" style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",display:"block"}}>
               <rect width="960" height="600" fill={C.paper}/>
               {feats.map((f,i)=><path key={i} d={path(f)||""} fill={gf(f.id)} stroke={C.g30} strokeWidth={0.5}/>)}
               {[...sites].sort((a,b)=>b.add-a.add).map((s,i)=>{
@@ -212,6 +213,7 @@ export default function Dashboard() {
                 </g>);
               })}
             </svg>
+            </div>
             {/* Hover tooltip */}
             {hov&&!sel&&(
               <div style={{position:"absolute",left:Math.min(tp.x+14,480),top:tp.y-8,background:C.paper,border:`2px solid ${C.ink}`,padding:"10px 14px",pointerEvents:"none",zIndex:10,minWidth:220,fontFamily:serif}}>
