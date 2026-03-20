@@ -103,6 +103,8 @@ export default function Dashboard() {
           .header-logo{height:32px!important}
           .header-spacer{display:none!important}
           .header-center{flex:1 1 0!important;min-width:0!important}
+          .map-legend{font-size:8px!important;padding:3px 6px!important;gap:8px!important}
+          .map-legend .legend-dot{width:6px!important;height:6px!important}
         }
       `}</style>
       <header className="header-pad" style={{background:C.ink,color:C.paper,padding:"24px 36px",display:"flex",alignItems:"center"}}>
@@ -236,15 +238,15 @@ export default function Dashboard() {
               </div>
             )}
             {/* Legend */}
-            <div style={{position:"absolute",bottom:8,left:8,display:"flex",gap:16,fontSize:10,fontFamily:mono,background:`${C.paper}ee`,padding:"6px 10px",border:`1px solid ${C.g30}`}}>
+            <div className="map-legend" style={{position:"absolute",bottom:8,left:8,display:"flex",gap:16,fontSize:10,fontFamily:mono,background:`${C.paper}ee`,padding:"6px 10px",border:`1px solid ${C.g30}`}}>
               {view==="regulatory"?Object.entries(ENV_C).map(([k,c])=>(
                 <div key={k} style={{display:"flex",alignItems:"center",gap:4}}>
-                  <div style={{width:8,height:8,background:c,border:`1px solid ${C.g50}`}}/><span>{k}</span>
+                  <div className="legend-dot" style={{width:8,height:8,background:c,border:`1px solid ${C.g50}`}}/><span>{k}</span>
                 </div>
               )):(
                 <>
-                  <div style={{display:"flex",alignItems:"center",gap:4}}><div style={{width:8,height:8,borderRadius:"50%",background:C.blue}}/><span>Headroom</span></div>
-                  <div style={{display:"flex",alignItems:"center",gap:4}}><div style={{width:8,height:8,borderRadius:"50%",background:C.g50}}/><span>Maxed</span></div>
+                  <div style={{display:"flex",alignItems:"center",gap:4}}><div className="legend-dot" style={{width:8,height:8,borderRadius:"50%",background:C.blue}}/><span>Headroom</span></div>
+                  <div style={{display:"flex",alignItems:"center",gap:4}}><div className="legend-dot" style={{width:8,height:8,borderRadius:"50%",background:C.g50}}/><span>Maxed</span></div>
                   <span style={{color:C.warm}}>Marker size = MWt potential</span>
                 </>
               )}
