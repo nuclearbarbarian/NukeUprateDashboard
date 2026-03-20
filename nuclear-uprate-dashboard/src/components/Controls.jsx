@@ -4,8 +4,7 @@ import Tooltip from "./Tooltip.jsx";
 
 const TIP_MAP = {
   Clear:      "No major state-level regulatory or political barriers to uprate. Favorable or neutral PUC posture, no active moratoriums.",
-  Mixed:      "Mixed signals — some supportive policy but with meaningful hurdles such as partial deregulation conflicts, pending legislation, or contested rate cases.",
-  Restricted: "Significant state-level barriers: active legislative moratoriums, hostile PUC precedent, or explicit bans on new nuclear capacity.",
+  Restricted: "Significant state-level barriers: active legislative moratoriums, waste import/storage bans, or other explicit restrictions on nuclear capacity. Includes previously 'mixed' states — the presence of any active restriction is treated as a barrier to uprate.",
   PWR:        "Pressurized Water Reactor — the most common US design. Water is kept under high pressure so it stays liquid as it transfers heat to a secondary steam loop that drives the turbine. Easier to uprate via thermal margin analysis.",
   BWR:        "Boiling Water Reactor — water boils directly in the reactor vessel, sending steam straight to the turbine. Fewer plants in the US fleet; uprates often require additional neutronics and containment review.",
   "Reg.":     "Regulated market — the plant operates in a state where a public utility commission sets electricity rates. Uprate economics are more predictable; additional capacity is typically rolled into the rate base.",
@@ -18,7 +17,7 @@ const FILTERS = [
   { k:"type", o:["All","PWR","BWR"] },
   { k:"mkt",  o:["All","Reg.","Merch."] },
   { k:"hr",   o:["All","Headroom","Maxed"] },
-  { k:"env",  o:["All","Clear","Mixed","Restricted"] },
+  { k:"env",  o:["All","Clear","Restricted"] },
 ];
 
 export default function Controls({ fil, setFil }) {

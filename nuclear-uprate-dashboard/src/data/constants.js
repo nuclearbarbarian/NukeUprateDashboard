@@ -23,7 +23,6 @@ export const COLORS = {
 // Regulatory environment → spot color mapping
 export const ENV_COLORS = {
   Clear:      COLORS.green,
-  Mixed:      COLORS.yellow,
   Restricted: COLORS.red,
 };
 

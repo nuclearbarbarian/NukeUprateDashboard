@@ -17,6 +17,12 @@ const FIELDS = [
   { l:"Cycle",          k:"type", fmt:v=>v==="BWR"?"Direct":"Indirect" },
 ];
 
+const WASTE_TIPS = {
+  "HLW Import Ban":   "Louisiana law prohibits importing high-level radioactive waste from out of state for storage or disposal. Does not directly restrict uprate operations at existing licensed facilities, but reflects political constraints on nuclear waste management in the state.",
+  "HLW Storage Ban":  "Texas law (Tex. Health & Safety Code § 401.207) prohibits permanent disposal of high-level radioactive waste in the state. Does not block uprate operations, but complicates long-term spent fuel management planning for plants without on-site dry cask capacity.",
+  "Import Ban":       "Washington state restricts importing radioactive waste without specific legislative authorization. Does not directly restrict uprate operations at existing plants, but indicates heightened regulatory sensitivity to nuclear materials and waste transport in the state.",
+};
+
 const MOR_TIPS = {
   "HLW Repository Req.":    "State law bars construction of new nuclear plants until a federally licensed high-level waste repository is operational. NRC license amendments for uprates at existing plants are a federal process not directly blocked by this law, but it signals significant state-level political risk for new nuclear investment.",
   "Certificate-of-Need Ban":"Minnesota law (Minn. Stat. § 216B.243) prohibits the PUC from issuing a certificate of need for nuclear generating plants. Any regulated-utility uprate that requires PUC approval for new capital expenditure could face challenges under this statute.",
@@ -67,7 +73,7 @@ function PlantDetail({ sel, setSel, sp }) {
       </div>
 
       {sd?.mor!=="None" && sd?.mor!=="Repealed" && <Alert color={C.red} text={`Moratorium: ${sd.mor}`} tip={MOR_TIPS[sd.mor]}/>}
-      {sd?.waste!=="None"                        && <Alert color={C.yellow} text={`Waste: ${sd.waste}`}/>}
+      {sd?.waste!=="None"                        && <Alert color={C.yellow} text={`Waste: ${sd.waste}`} tip={WASTE_TIPS[sd.waste]}/>}
 
       <table style={{width:"100%", borderCollapse:"collapse", fontSize:12, fontFamily:mono, marginBottom:14}}>
         <thead><tr>
