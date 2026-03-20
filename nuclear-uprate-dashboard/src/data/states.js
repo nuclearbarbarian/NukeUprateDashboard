@@ -31,7 +31,7 @@ export const STATE_REGULATORY = {
   NE: { mor: "None",                      waste: "None",                          env: "Clear",      sepa: false },
   NH: { mor: "None",                      waste: "None",                          env: "Clear",      sepa: false },
   NJ: { mor: "Coastal Limits",            waste: "None",                          env: "Restricted",      sepa: false },
-  NY: { mor: "LIPA Area Ban",             waste: "None",                          env: "Restricted",      sepa: true  },
+  NY: { mor: "LIPA Area Ban",             waste: "None",                          env: "Clear",      sepa: true  },
   OH: { mor: "None",                      waste: "None",                          env: "Clear",      sepa: false },
   PA: { mor: "None",                      waste: "None",                          env: "Clear",      sepa: false },
   SC: { mor: "None",                      waste: "None",                          env: "Clear",      sepa: false },
