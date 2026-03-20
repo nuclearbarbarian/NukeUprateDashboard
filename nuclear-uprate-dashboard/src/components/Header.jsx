@@ -24,16 +24,19 @@ export default function Header() {
             style={{height:48, display:"block"}}
           />
           <div className="logo-tooltip" style={{
-            display:"none", position:"absolute", top:"calc(100% + 8px)", right:0,
-            width:300, background:C.newsprint, color:C.ink, border:`2px solid ${C.g30}`,
-            padding:"12px 14px", zIndex:100, fontSize:12, lineHeight:1.6,
+            display:"none", position:"absolute", top:"100%", right:0,
+            width:300, background:"transparent", paddingTop:8, zIndex:100,
+          }}>
+          <div style={{
+            background:C.newsprint, color:C.ink, border:`2px solid ${C.g30}`,
+            padding:"12px 14px", fontSize:12, lineHeight:1.6,
             fontFamily:serif, textAlign:"left", boxShadow:"0 2px 8px rgba(0,0,0,0.3)"
           }}>
             This is a{" "}
             <a href="https://www.nuclearbarbarians.com/" target="_blank" rel="noreferrer" style={{color:C.blue, fontWeight:700}}>Nuclear Barbarians</a>
             {" "}project, which is part of the Foundation for American Innovation. To support this project and others like it,{" "}
             <a href="https://www.thefai.org/donate" target="_blank" rel="noreferrer" style={{color:C.blue, fontWeight:700}}>click here</a>.
-          </div>
+          </div></div>
         </div>
       </div>
     </header>
