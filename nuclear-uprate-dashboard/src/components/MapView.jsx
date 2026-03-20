@@ -1,4 +1,4 @@
-import { COLORS as C, ENV_COLORS as ENV_C, serif, mono } from "../data/constants.js";
+import { COLORS as C, serif, mono } from "../data/constants.js";
 import { STATE_REGULATORY as SD } from "../data/states.js";
 
 function LegendDot({ color, label, square }) {
@@ -10,7 +10,7 @@ function LegendDot({ color, label, square }) {
   );
 }
 
-export default function MapView({ feats, sites, mx, proj, path, view, gf, sel, setSel, hov, setHov, tp, setTp, setMapEl, mapEl, mapW }) {
+export default function MapView({ feats, sites, mx, proj, path, gf, sel, setSel, hov, setHov, tp, setTp, setMapEl, mapEl, mapW }) {
   return (
     <div ref={setMapEl} style={{flex:"1 1 300px", background:C.paper, border:`1px solid ${C.g30}`, position:"relative", overflow:"visible"}}>
       <svg viewBox="0 0 960 600" width={mapW} height={Math.round(mapW*600/960)} style={{display:"block", maxWidth:"100%"}}>
@@ -23,7 +23,7 @@ export default function MapView({ feats, sites, mx, proj, path, view, gf, sel, s
           if (!c) return null;
           const hr    = s.add > 0;
           const r     = hr ? 3 + (s.add / mx) * 6.5 : 2.5;
-          const col   = view==="regulatory" ? (ENV_C[SD[s.st]?.env]||C.g50) : (hr ? C.blue : C.g50);
+          const col   = hr ? (s.ps[0].type==="PWR" ? C.blue : C.red) : C.g50;
           const isSel = sel && s.ps.some(p=>p.name===sel.name);
           return (
             <g key={i} style={{cursor:"pointer"}}
@@ -61,14 +61,10 @@ export default function MapView({ feats, sites, mx, proj, path, view, gf, sel, s
 
       <div className="map-legend" style={{position:"absolute", bottom:8, left:8, display:"flex", gap:16,
         fontSize:10, fontFamily:mono, background:`${C.paper}ee`, padding:"6px 10px", border:`1px solid ${C.g30}`}}>
-        {view==="regulatory"
-          ? Object.entries(ENV_C).map(([k,c])=><LegendDot key={k} color={c} label={k} square/>)
-          : <>
-              <LegendDot color={C.blue} label="Headroom"/>
-              <LegendDot color={C.g50}  label="Maxed"/>
-              <span style={{color:C.warm}}>Marker size = MWt potential</span>
-            </>
-        }
+        <LegendDot color={C.blue} label="PWR"/>
+        <LegendDot color={C.red}  label="BWR"/>
+        <LegendDot color={C.g50}  label="Maxed"/>
+        <span style={{color:C.warm}}>Size = MWt headroom</span>
       </div>
     </div>
   );

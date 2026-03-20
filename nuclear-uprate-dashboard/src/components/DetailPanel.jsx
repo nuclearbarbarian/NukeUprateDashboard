@@ -17,18 +17,31 @@ const FIELDS = [
   { l:"Cycle",          k:"type", fmt:v=>v==="BWR"?"Direct":"Indirect" },
 ];
 
-function Alert({ color, text }) {
-  return (
-    <div style={{fontSize:12, color, fontWeight:700, marginBottom:10, padding:"6px 10px", borderLeft:`3px solid ${color}`, background:`${color}08`}}>
-      {text}
-    </div>
-  );
-}
+const MOR_TIPS = {
+  "HLW Repository Req.":    "State law bars construction of new nuclear plants until a federally licensed high-level waste repository is operational. NRC license amendments for uprates at existing plants are a federal process not directly blocked by this law, but it signals significant state-level political risk for new nuclear investment.",
+  "Certificate-of-Need Ban":"Minnesota law (Minn. Stat. § 216B.243) prohibits the PUC from issuing a certificate of need for nuclear generating plants. Any regulated-utility uprate that requires PUC approval for new capital expenditure could face challenges under this statute.",
+  "Coastal Limits":         "New Jersey's Coastal Area Facility Review Act (CAFRA) imposes additional permitting requirements for major power plant expansions in coastal zones. Plants within a CAFRA zone may require supplemental state review for uprate-related construction.",
+  "LIPA Area Ban":          "New York law prohibits nuclear power plants in the Long Island Power Authority service territory. Existing plants outside the LIPA zone (Ginna, Nine Mile Point, Indian Point) are not directly restricted by this provision.",
+};
 
-function LegendDot({ color, label }) {
+function Alert({ color, text, tip }) {
+  if (!tip) {
+    return (
+      <div style={{fontSize:12, color, fontWeight:700, marginBottom:10, padding:"6px 10px", borderLeft:`3px solid ${color}`, background:`${color}08`}}>
+        {text}
+      </div>
+    );
+  }
   return (
-    <div style={{display:"flex", alignItems:"center", gap:4}}>
-      <div style={{width:8, height:8, background:color, border:`1px solid ${C.g50}`}}/><span>{label}</span>
+    <div className="sepa-tip" style={{position:"relative", marginBottom:10}}>
+      <div style={{fontSize:12, color, fontWeight:700, padding:"6px 10px", borderLeft:`3px solid ${color}`, background:`${color}08`, cursor:"help"}}>
+        {text} <span style={{fontSize:10, opacity:0.7}}> (?)</span>
+      </div>
+      <div className="sepa-tooltip" style={{display:"none", position:"absolute", top:"calc(100% + 4px)", left:0,
+        width:280, background:C.paper, border:`2px solid ${C.ink}`, padding:"10px 12px", zIndex:20,
+        fontSize:12, lineHeight:1.5, fontFamily:serif, color:C.g90}}>
+        {tip}
+      </div>
     </div>
   );
 }
@@ -53,7 +66,7 @@ function PlantDetail({ sel, setSel, sp }) {
         {sd?.env?.toUpperCase()} PATH
       </div>
 
-      {sd?.mor!=="None" && sd?.mor!=="Repealed" && <Alert color={C.red}    text={`Moratorium: ${sd.mor}`}/>}
+      {sd?.mor!=="None" && sd?.mor!=="Repealed" && <Alert color={C.red} text={`Moratorium: ${sd.mor}`} tip={MOR_TIPS[sd.mor]}/>}
       {sd?.waste!=="None"                        && <Alert color={C.yellow} text={`Waste: ${sd.waste}`}/>}
 
       <table style={{width:"100%", borderCollapse:"collapse", fontSize:12, fontFamily:mono, marginBottom:14}}>

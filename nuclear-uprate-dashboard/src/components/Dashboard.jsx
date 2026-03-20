@@ -18,7 +18,6 @@ export default function Dashboard() {
   const [hov,   setHov]   = useState(null);
   const [tp,    setTp]    = useState({x:0, y:0});
   const [fil,   setFil]   = useState({env:"All", type:"All", mkt:"All", hr:"All"});
-  const [view,  setView]  = useState("uprate");
   const [mapEl, setMapEl] = useState(null);
   const [mapW,  setMapW]  = useState(()=>typeof window!=="undefined" ? Math.min(window.innerWidth-30, 960) : 960);
 
@@ -69,11 +68,9 @@ export default function Dashboard() {
   const filteredStates = useMemo(()=>new Set(filtered.map(p=>p.state)),[filtered]);
 
   const gf = useCallback(fid=>{
-    const a=FIPS[+fid], s=SD[a];
-    if(view==="regulatory" && s)
-      return s.env==="Clear"?`${C.green}18`:s.env==="Mixed"?`${C.yellow}18`:`${C.red}18`;
+    const a=FIPS[+fid];
     return filteredStates.has(a) ? C.newsprint : "#EAE7DD";
-  },[view, filteredStates]);
+  },[filteredStates]);
 
   // Co-located units for selected plant — derived here so DetailPanel doesn't re-scan PLANTS
   const sp = useMemo(()=>sel ? PLANTS.filter(p=>p.lat===sel.lat && p.lon===sel.lon) : [], [sel]);
@@ -99,11 +96,11 @@ export default function Dashboard() {
       <div className="main-pad" style={{maxWidth:1380, margin:"0 auto", padding:"24px 36px"}}>
         <SummaryStats stats={stats}/>
         <EstimateBox/>
-        <Controls view={view} setView={setView} fil={fil} setFil={setFil}/>
+        <Controls fil={fil} setFil={setFil}/>
         <div style={{display:"flex", gap:24, flexWrap:"wrap"}}>
           <MapView
             feats={feats} sites={sites} mx={mx}
-            proj={proj} path={path} view={view} gf={gf}
+            proj={proj} path={path} gf={gf}
             sel={sel} setSel={setSel}
             hov={hov} setHov={setHov}
             tp={tp} setTp={setTp}
