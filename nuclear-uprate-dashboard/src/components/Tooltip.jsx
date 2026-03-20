@@ -1,5 +1,4 @@
-import { COLORS as C, FONTS } from "../data/constants.js";
-const mono = FONTS.mono;
+import { COLORS as C, mono } from "../data/constants.js";
 
 export default function Tooltip({ text, children }) {
   return (
@@ -11,7 +10,7 @@ export default function Tooltip({ text, children }) {
         display:"none", position:"absolute", bottom:"calc(100% + 6px)",
         left:"50%", transform:"translateX(-50%)", width:220,
         background:C.ink, color:C.newsprint, fontSize:11, lineHeight:1.5,
-        padding:"8px 10px", fontFamily:mono, fontWeight:400,
+        padding:"8px 10px", fontFamily:mono,
         letterSpacing:"0.01em", zIndex:100, pointerEvents:"none",
         boxShadow:"0 2px 8px rgba(0,0,0,0.3)"
       }}>

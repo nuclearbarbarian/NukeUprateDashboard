@@ -1,8 +1,6 @@
-import { COLORS as C, FONTS } from "../data/constants.js";
+import { COLORS as C, mono, LABEL_STYLE } from "../data/constants.js";
 import Btn from "./Btn.jsx";
 import Tooltip from "./Tooltip.jsx";
-
-const mono = FONTS.mono;
 
 const TIP_MAP = {
   Clear:     "No major state-level regulatory or political barriers to uprate. Favorable or neutral PUC posture, no active moratoriums.",
@@ -24,7 +22,7 @@ const FILTERS = [
 export default function Controls({ view, setView, fil, setFil }) {
   return (
     <div style={{display:"flex", gap:8, flexWrap:"wrap", alignItems:"center", marginBottom:16}}>
-      <span style={{fontFamily:mono, fontSize:10, textTransform:"uppercase", letterSpacing:"0.1em", color:C.warm, marginRight:6}}>View</span>
+      <span style={{...LABEL_STYLE, marginRight:6}}>View</span>
       {["uprate","regulatory"].map(m=>(
         <Btn key={m} on={view===m} onClick={()=>setView(m)}>
           {m==="uprate"
@@ -33,7 +31,7 @@ export default function Controls({ view, setView, fil, setFil }) {
         </Btn>
       ))}
       <span style={{width:1, height:20, background:C.g30, margin:"0 8px"}}/>
-      <span style={{fontFamily:mono, fontSize:10, textTransform:"uppercase", letterSpacing:"0.1em", color:C.warm, marginRight:6}}>Filter</span>
+      <span style={{...LABEL_STYLE, marginRight:6}}>Filter</span>
       {FILTERS.map(({k,o})=>(
         <div key={k} style={{display:"flex", gap:2}}>
           {o.map(v=>{

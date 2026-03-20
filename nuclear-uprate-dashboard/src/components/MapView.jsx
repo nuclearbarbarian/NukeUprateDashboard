@@ -1,8 +1,14 @@
-import { COLORS as C, ENV_COLORS as ENV_C, FONTS } from "../data/constants.js";
+import { COLORS as C, ENV_COLORS as ENV_C, serif, mono } from "../data/constants.js";
 import { STATE_REGULATORY as SD } from "../data/states.js";
 
-const serif = FONTS.serif;
-const mono  = FONTS.mono;
+function LegendDot({ color, label, square }) {
+  return (
+    <div style={{display:"flex", alignItems:"center", gap:4}}>
+      <div style={{width:8, height:8, background:color, border:`1px solid ${C.g50}`, ...(square?{}:{borderRadius:"50%"})}}/>
+      <span>{label}</span>
+    </div>
+  );
+}
 
 export default function MapView({ feats, sites, mx, proj, path, view, gf, sel, setSel, hov, setHov, tp, setTp, setMapEl, mapEl, mapW }) {
   return (
@@ -12,23 +18,19 @@ export default function MapView({ feats, sites, mx, proj, path, view, gf, sel, s
         {feats.map((f,i)=>(
           <path key={i} d={path(f)||""} fill={gf(f.id)} stroke={C.g30} strokeWidth={0.5}/>
         ))}
-        {[...sites].sort((a,b)=>b.add-a.add).map((s,i)=>{
+        {sites.map((s,i)=>{
           const c = proj([s.lon, s.lat]);
           if (!c) return null;
-          const hr  = s.add > 0;
-          const r   = hr ? 3 + (s.add / mx) * 6.5 : 2.5;
-          const sd  = SD[s.st];
-          const col = view==="regulatory" ? (ENV_C[sd?.env]||C.g50) : (hr ? C.blue : C.g50);
+          const hr    = s.add > 0;
+          const r     = hr ? 3 + (s.add / mx) * 6.5 : 2.5;
+          const col   = view==="regulatory" ? (ENV_C[SD[s.st]?.env]||C.g50) : (hr ? C.blue : C.g50);
           const isSel = sel && s.ps.some(p=>p.name===sel.name);
           return (
             <g key={i} style={{cursor:"pointer"}}
               onClick={()=>setSel(s.ps[0])}
               onMouseEnter={e=>{
                 setHov(s);
-                if (mapEl) {
-                  const rect = mapEl.getBoundingClientRect();
-                  setTp({x:e.clientX-rect.left, y:e.clientY-rect.top});
-                }
+                if (mapEl) { const r=mapEl.getBoundingClientRect(); setTp({x:e.clientX-r.left, y:e.clientY-r.top}); }
               }}
               onMouseLeave={()=>setHov(null)}>
               {isSel && <circle cx={c[0]} cy={c[1]} r={r+4} fill="none" stroke={col} strokeWidth={1.5} strokeDasharray="3,2"/>}
@@ -38,17 +40,12 @@ export default function MapView({ feats, sites, mx, proj, path, view, gf, sel, s
         })}
       </svg>
 
-      {/* Hover tooltip */}
       {hov && !sel && (
-        <div style={{
-          position:"absolute", left:Math.min(tp.x+14,480), top:tp.y-8,
+        <div style={{position:"absolute", left:Math.min(tp.x+14,480), top:tp.y-8,
           background:C.paper, border:`2px solid ${C.ink}`, padding:"10px 14px",
-          pointerEvents:"none", zIndex:10, minWidth:220, fontFamily:serif
-        }}>
+          pointerEvents:"none", zIndex:10, minWidth:220, fontFamily:serif}}>
           <div style={{fontSize:14, fontWeight:700, marginBottom:3}}>
-            {hov.ps.length>1
-              ? `${hov.ps[0].name.replace(/ \d$/,"")} (${hov.ps.length} units)`
-              : hov.ps[0].name}
+            {hov.ps.length>1 ? `${hov.ps[0].name.replace(/ \d$/,"")} (${hov.ps.length} units)` : hov.ps[0].name}
           </div>
           <div style={{fontSize:11, color:C.g70, marginBottom:5, fontFamily:mono}}>
             {hov.st} · {hov.ps[0].type} · {hov.ps[0].lp} · {hov.ps[0].mkt}
@@ -62,17 +59,13 @@ export default function MapView({ feats, sites, mx, proj, path, view, gf, sel, s
         </div>
       )}
 
-      {/* Legend */}
-      <div className="map-legend" style={{position:"absolute", bottom:8, left:8, display:"flex", gap:16, fontSize:10, fontFamily:mono, background:`${C.paper}ee`, padding:"6px 10px", border:`1px solid ${C.g30}`}}>
+      <div className="map-legend" style={{position:"absolute", bottom:8, left:8, display:"flex", gap:16,
+        fontSize:10, fontFamily:mono, background:`${C.paper}ee`, padding:"6px 10px", border:`1px solid ${C.g30}`}}>
         {view==="regulatory"
-          ? Object.entries(ENV_C).map(([k,c])=>(
-              <div key={k} style={{display:"flex", alignItems:"center", gap:4}}>
-                <div className="legend-dot" style={{width:8, height:8, background:c, border:`1px solid ${C.g50}`}}/><span>{k}</span>
-              </div>
-            ))
+          ? Object.entries(ENV_C).map(([k,c])=><LegendDot key={k} color={c} label={k} square/>)
           : <>
-              <div style={{display:"flex", alignItems:"center", gap:4}}><div className="legend-dot" style={{width:8, height:8, borderRadius:"50%", background:C.blue}}/><span>Headroom</span></div>
-              <div style={{display:"flex", alignItems:"center", gap:4}}><div className="legend-dot" style={{width:8, height:8, borderRadius:"50%", background:C.g50}}/><span>Maxed</span></div>
+              <LegendDot color={C.blue} label="Headroom"/>
+              <LegendDot color={C.g50}  label="Maxed"/>
               <span style={{color:C.warm}}>Marker size = MWt potential</span>
             </>
         }

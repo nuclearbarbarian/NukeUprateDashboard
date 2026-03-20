@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import * as d3 from "d3";
 import { PLANTS } from "../data/plants.js";
 import { STATE_REGULATORY as SD } from "../data/states.js";
-import { COLORS as C, ENV_COLORS as ENV_C, FONTS, FIPS_TO_STATE as FIPS, US_TOPO_URL } from "../data/constants.js";
+import { COLORS as C, FIPS_TO_STATE as FIPS, US_TOPO_URL, serif } from "../data/constants.js";
 
 import Header            from "./Header.jsx";
 import SummaryStats      from "./SummaryStats.jsx";
@@ -12,17 +12,15 @@ import MapView           from "./MapView.jsx";
 import DetailPanel       from "./DetailPanel.jsx";
 import MethodologyFooter from "./MethodologyFooter.jsx";
 
-const serif = FONTS.serif;
-
 export default function Dashboard() {
-  const [geo,    setGeo]    = useState(null);
-  const [sel,    setSel]    = useState(null);
-  const [hov,    setHov]    = useState(null);
-  const [tp,     setTp]     = useState({x:0, y:0});
-  const [fil,    setFil]    = useState({env:"All", type:"All", mkt:"All", hr:"All"});
-  const [view,   setView]   = useState("uprate");
-  const [mapEl,  setMapEl]  = useState(null);
-  const [mapW,   setMapW]   = useState(()=>typeof window!=="undefined" ? Math.min(window.innerWidth-30, 960) : 960);
+  const [geo,   setGeo]   = useState(null);
+  const [sel,   setSel]   = useState(null);
+  const [hov,   setHov]   = useState(null);
+  const [tp,    setTp]    = useState({x:0, y:0});
+  const [fil,   setFil]   = useState({env:"All", type:"All", mkt:"All", hr:"All"});
+  const [view,  setView]  = useState("uprate");
+  const [mapEl, setMapEl] = useState(null);
+  const [mapW,  setMapW]  = useState(()=>typeof window!=="undefined" ? Math.min(window.innerWidth-30, 960) : 960);
 
   const proj = useMemo(()=>d3.geoAlbersUsa().scale(1080).translate([476,296]),[]);
   const path = useMemo(()=>d3.geoPath().projection(proj),[proj]);
@@ -52,10 +50,11 @@ export default function Dashboard() {
     return true;
   }),[fil]);
 
+  // Sites sorted once here — MapView and TopOpportunities both consume this
   const sites = useMemo(()=>{
     const m={};
     filtered.forEach(p=>{const k=`${p.lat}_${p.lon}`;if(!m[k])m[k]={lat:p.lat,lon:p.lon,ps:[],add:0,st:p.state};m[k].ps.push(p);m[k].add+=p.add});
-    return Object.values(m);
+    return Object.values(m).sort((a,b)=>b.add-a.add);
   },[filtered]);
 
   const stats = useMemo(()=>{
@@ -66,16 +65,21 @@ export default function Dashboard() {
 
   const mx = useMemo(()=>Math.max(...sites.map(s=>s.add),1),[sites]);
 
+  // Set for O(1) state lookups in gf — avoids O(n) scan per state path
+  const filteredStates = useMemo(()=>new Set(filtered.map(p=>p.state)),[filtered]);
+
   const gf = useCallback(fid=>{
     const a=FIPS[+fid], s=SD[a];
-    if(view==="regulatory" && s){
+    if(view==="regulatory" && s)
       return s.env==="Clear"?`${C.green}18`:s.env==="Mixed"?`${C.yellow}18`:`${C.red}18`;
-    }
-    return filtered.some(p=>p.state===a) ? C.newsprint : "#EAE7DD";
-  },[view, filtered]);
+    return filteredStates.has(a) ? C.newsprint : "#EAE7DD";
+  },[view, filteredStates]);
+
+  // Co-located units for selected plant — derived here so DetailPanel doesn't re-scan PLANTS
+  const sp = useMemo(()=>sel ? PLANTS.filter(p=>p.lat===sel.lat && p.lon===sel.lon) : [], [sel]);
 
   return (
-    <div style={{minHeight:"100vh", background:C.news, color:C.ink, fontFamily:serif}}>
+    <div style={{minHeight:"100vh", background:C.newsprint, color:C.ink, fontFamily:serif}}>
       <style>{`
         .logo-tip:hover .logo-tooltip{display:block!important}
         .sepa-tip:hover .sepa-tooltip{display:block!important}
@@ -96,7 +100,6 @@ export default function Dashboard() {
         <SummaryStats stats={stats}/>
         <EstimateBox/>
         <Controls view={view} setView={setView} fil={fil} setFil={setFil}/>
-
         <div style={{display:"flex", gap:24, flexWrap:"wrap"}}>
           <MapView
             feats={feats} sites={sites} mx={mx}
@@ -106,13 +109,8 @@ export default function Dashboard() {
             tp={tp} setTp={setTp}
             mapEl={mapEl} setMapEl={setMapEl} mapW={mapW}
           />
-          <DetailPanel
-            sel={sel} setSel={setSel}
-            sites={sites}
-            hov={hov} setHov={setHov}
-          />
+          <DetailPanel sel={sel} setSel={setSel} sp={sp} sites={sites} hov={hov} setHov={setHov}/>
         </div>
-
         <MethodologyFooter/>
       </div>
     </div>

@@ -1,5 +1,4 @@
-import { COLORS as C, FONTS } from "../data/constants.js";
-const mono = FONTS.mono;
+import { COLORS as C, LABEL_STYLE } from "../data/constants.js";
 
 export default function EstimateBox() {
   return (
@@ -11,7 +10,7 @@ export default function EstimateBox() {
 
         {/* NEI operator plans */}
         <div style={{flex:"1 1 200px"}}>
-          <div style={{fontFamily:mono, fontSize:10, textTransform:"uppercase", letterSpacing:"0.1em", color:C.warm, marginBottom:3}}>
+          <div style={{...LABEL_STYLE, marginBottom:3}}>
             Operator-Reported Plans <span style={{color:C.g50}}>(NEI 2025 Survey)</span>
           </div>
           <div style={{fontSize:22, fontWeight:700, fontFamily:mono, color:C.green}}>
@@ -23,10 +22,10 @@ export default function EstimateBox() {
 
         {/* UPRISE */}
         <div style={{flex:"1 1 200px"}}>
-          <div style={{fontFamily:mono, fontSize:10, textTransform:"uppercase", letterSpacing:"0.1em", color:C.warm, marginBottom:3}}>
+          <div style={{...LABEL_STYLE, marginBottom:3}}>
             DOE UPRISE Target <span style={{color:C.g50}}>(Federal Program)</span>
           </div>
-          <div style={{fontSize:22, fontWeight:700, fontFamily:mono, color:"#8B4513"}}>
+          <div style={{fontSize:22, fontWeight:700, fontFamily:LABEL_STYLE.fontFamily, color:C.uprise}}>
             5,000 <span style={{fontSize:12, fontWeight:400, color:C.g70}}>MWe (electric)</span>
             <span style={{fontSize:14, fontWeight:400, color:C.g50, marginLeft:12}}>5 GW by 2029</span>
           </div>

@@ -1,5 +1,4 @@
-import { COLORS as C, FONTS } from "../data/constants.js";
-const mono = FONTS.mono;
+import { COLORS as C, mono } from "../data/constants.js";
 
 export default function Btn({ on, onClick, children }) {
   return (

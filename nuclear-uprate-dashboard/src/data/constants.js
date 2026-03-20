@@ -12,6 +12,7 @@ export const COLORS = {
   red:      "#8B2B2B",
   yellow:   "#C4A035",
   green:    "#3D5C3D",
+  uprise:   "#8B4513",   // DOE UPRISE program — saddle brown
   g90:      "#2D2D2D",
   g70:      "#5C5C5C",
   g50:      "#8A8A8A",
@@ -30,6 +31,17 @@ export const ENV_COLORS = {
 export const FONTS = {
   serif: "'Source Serif 4','Charter','Georgia',serif",
   mono:  "'IBM Plex Mono','Consolas',monospace",
+};
+export const serif = FONTS.serif;
+export const mono  = FONTS.mono;
+
+// Shared label style — warm mono uppercase caps, used across components
+export const LABEL_STYLE = {
+  fontFamily: FONTS.mono,
+  fontSize: 10,
+  textTransform: "uppercase",
+  letterSpacing: "0.1em",
+  color: COLORS.warm,
 };
 
 // FIPS code → state abbreviation

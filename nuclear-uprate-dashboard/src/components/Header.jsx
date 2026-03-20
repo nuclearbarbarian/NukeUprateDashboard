@@ -1,6 +1,4 @@
-import { COLORS as C, FONTS } from "../data/constants.js";
-const serif = FONTS.serif;
-const mono  = FONTS.mono;
+import { COLORS as C, serif, mono } from "../data/constants.js";
 
 export default function Header() {
   return (
