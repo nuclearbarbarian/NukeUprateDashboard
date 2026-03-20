@@ -13,7 +13,7 @@ export default function EstimateBox() {
           <div style={{...LABEL_STYLE, marginBottom:3}}>
             Operator-Reported Plans <span style={{color:C.g50}}>(NEI 2025 Survey)</span>
           </div>
-          <div style={{fontSize:22, fontWeight:700, fontFamily:mono, color:C.green}}>
+          <div style={{fontSize:22, fontWeight:700, fontFamily:LABEL_STYLE.fontFamily, color:C.green}}>
             ~8,000 <span style={{fontSize:12, fontWeight:400, color:C.g70}}>MWe (electric)</span>
             <span style={{fontSize:14, fontWeight:400, color:C.g50, marginLeft:12}}>≈ 8 GWe this decade</span>
           </div>
