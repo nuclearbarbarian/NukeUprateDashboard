@@ -41,7 +41,7 @@ export default function MapView({ feats, sites, mx, proj, path, gf, sel, setSel,
       </svg>
 
       {hov && !sel && (
-        <div style={{position:"absolute", left:Math.min(tp.x+14,480), top:tp.y-8,
+        <div className="map-hover-tip" style={{position:"absolute", left:Math.min(tp.x+14,480), top:tp.y-8,
           background:C.paper, border:`2px solid ${C.ink}`, padding:"10px 14px",
           pointerEvents:"none", zIndex:10, minWidth:220, fontFamily:serif}}>
           <div style={{fontSize:14, fontWeight:700, marginBottom:3}}>

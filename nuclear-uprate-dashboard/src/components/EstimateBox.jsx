@@ -9,7 +9,7 @@ export default function EstimateBox() {
       <div style={{display:"flex", gap:24, flexWrap:"wrap", alignItems:"flex-end"}}>
 
         {/* NEI operator plans */}
-        <div style={{flex:"1 1 200px"}}>
+        <div style={{flex:"1 1 200px", minWidth:0}}>
           <div style={{...LABEL_STYLE, marginBottom:3}}>
             Operator-Reported Plans <span style={{color:C.g50}}>(NEI 2025 Survey)</span>
           </div>
@@ -21,7 +21,7 @@ export default function EstimateBox() {
         </div>
 
         {/* UPRISE */}
-        <div style={{flex:"1 1 200px"}}>
+        <div style={{flex:"1 1 200px", minWidth:0}}>
           <div style={{...LABEL_STYLE, marginBottom:3}}>
             DOE UPRISE Target <span style={{color:C.g50}}>(Federal Program)</span>
           </div>

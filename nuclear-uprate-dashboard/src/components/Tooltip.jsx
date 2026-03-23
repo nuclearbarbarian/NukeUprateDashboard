@@ -2,9 +2,11 @@ import { COLORS as C, mono } from "../data/constants.js";
 
 export default function Tooltip({ text, children }) {
   return (
-    <span style={{position:"relative", display:"inline-block"}}
+    <span style={{position:"relative", display:"inline-block"}} tabIndex={0}
       onMouseEnter={e=>e.currentTarget.querySelector(".tt").style.display="block"}
-      onMouseLeave={e=>e.currentTarget.querySelector(".tt").style.display="none"}>
+      onMouseLeave={e=>e.currentTarget.querySelector(".tt").style.display="none"}
+      onFocus={e=>e.currentTarget.querySelector(".tt").style.display="block"}
+      onBlur={e=>e.currentTarget.querySelector(".tt").style.display="none"}>
       {children}
       <span className="tt" style={{
         display:"none", position:"absolute", bottom:"calc(100% + 6px)",

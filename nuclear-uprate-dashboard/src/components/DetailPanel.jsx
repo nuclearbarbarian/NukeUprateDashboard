@@ -64,7 +64,7 @@ function PlantDetail({ sel, setSel, sp }) {
           <h2 style={{fontSize:18, fontWeight:700, margin:0}}>{sel.name.replace(/ \d$/,"")}</h2>
           <p style={{fontSize:11, color:C.g70, fontFamily:mono, margin:"3px 0 0"}}>{sel.state} · {sel.type} · {sel.lp} · {sel.mkt}</p>
         </div>
-        <button onClick={()=>setSel(null)} style={{background:"none", border:`1px solid ${C.g30}`, color:C.g70, padding:"2px 8px", cursor:"pointer", fontFamily:mono, fontSize:11}}>✕</button>
+        <button onClick={()=>setSel(null)} style={{background:"none", border:`1px solid ${C.g30}`, color:C.g70, padding:"2px 8px", cursor:"pointer", fontFamily:mono, fontSize:11, minWidth:44, minHeight:36}}>✕</button>
       </div>
 
       <div style={{display:"inline-block", padding:"3px 10px", fontSize:11, fontWeight:700, fontFamily:mono, letterSpacing:"0.05em",
@@ -101,7 +101,7 @@ function PlantDetail({ sel, setSel, sp }) {
         </div>
       )}
 
-      <div style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:8}}>
+      <div className="plant-field-grid" style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:8}}>
         {FIELDS.map((d,i)=>{
           const v = d.fmt ? d.fmt(sel[d.k], sd) : sel[d.k];
           const col = i%3;
@@ -109,7 +109,7 @@ function PlantDetail({ sel, setSel, sp }) {
           const caretPos = col===0 ? {left:16} : col===2 ? {right:16, left:"auto"} : {left:"50%", marginLeft:-5};
           return (
             <div key={i} style={{padding:"8px 10px", background:C.newsprint, border:`1px solid ${C.g30}`, position:"relative", cursor:d.tip?"help":"default"}}
-              className={d.tip?"sepa-tip":""}>
+              className={d.tip?"sepa-tip":""} tabIndex={d.tip?0:undefined}>
               <div style={{...LABEL_STYLE, fontSize:9, marginBottom:2}}>
                 {d.l}{d.tip && <span style={{marginLeft:4, color:C.g50}}>(?)</span>}
               </div>
@@ -144,7 +144,7 @@ function TopOpportunities({ sites, hov, setHov, setSel }) {
         const lab = s.ps.length>1 ? `${s.ps[0].name.replace(/ \d$/,"")} (${s.ps.length}u)` : s.ps[0].name;
         return (
           <div key={i} onClick={()=>setSel(s.ps[0])} onMouseEnter={()=>setHov(s)} onMouseLeave={()=>setHov(null)}
-            style={{display:"flex", alignItems:"center", gap:8, padding:"6px 8px", cursor:"pointer",
+            style={{display:"flex", alignItems:"center", gap:8, padding:"8px", cursor:"pointer", minHeight:44,
               borderBottom:`1px solid ${C.g15}`, background:hov===s?C.newsprint:"transparent", transition:"background 0.1s"}}>
             <div style={{width:8, height:8, flexShrink:0, background:ENV_C[sd?.env]||C.g50, border:`1px solid ${C.g50}`}}/>
             <div style={{flex:1, minWidth:0}}>
@@ -161,7 +161,7 @@ function TopOpportunities({ sites, hov, setHov, setSel }) {
 
 export default function DetailPanel({ sel, setSel, sp, sites, hov, setHov }) {
   return (
-    <div style={{flex:"0 0 320px", background:C.paper, border:`1px solid ${C.g30}`, overflow:"visible"}}>
+    <div className="detail-panel" style={{flex:"0 0 320px", background:C.paper, border:`1px solid ${C.g30}`, overflow:"visible"}}>
       {sel
         ? <PlantDetail sel={sel} setSel={setSel} sp={sp}/>
         : <TopOpportunities sites={sites} hov={hov} setHov={setHov} setSel={setSel}/>

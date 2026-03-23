@@ -47,7 +47,8 @@ html, body {
   background: var(--gray-30);
 }
 
-/* Tooltip hover behavior */
-.sepa-tip:hover .sepa-tooltip {
+/* Tooltip hover/tap behavior */
+.sepa-tip:hover .sepa-tooltip,
+.sepa-tip:focus-within .sepa-tooltip {
   display: block !important;
 }

@@ -78,8 +78,10 @@ export default function Dashboard() {
   return (
     <div style={{minHeight:"100vh", background:C.newsprint, color:C.ink, fontFamily:serif}}>
       <style>{`
-        .logo-tip:hover .logo-tooltip{display:block!important}
-        .sepa-tip:hover .sepa-tooltip{display:block!important}
+        .logo-tip:hover .logo-tooltip,
+        .logo-tip:focus-within .logo-tooltip{display:block!important}
+        .sepa-tip:hover .sepa-tooltip,
+        .sepa-tip:focus-within .sepa-tooltip{display:block!important}
         @media(max-width:600px){
           .main-pad{padding:16px 14px!important}
           .header-pad{padding:14px 14px!important}
@@ -88,6 +90,10 @@ export default function Dashboard() {
           .header-center{flex:1 1 0!important;min-width:0!important}
           .map-legend{font-size:8px!important;padding:3px 6px!important;gap:8px!important}
           .map-legend .legend-dot{width:6px!important;height:6px!important}
+          .detail-panel{flex:1 1 100%!important;min-width:0!important}
+          .plant-field-grid{grid-template-columns:1fr 1fr!important}
+          .map-hover-tip{display:none!important}
+          .main-pad button{min-height:36px!important;padding-top:5px!important;padding-bottom:5px!important}
         }
       `}</style>
 
