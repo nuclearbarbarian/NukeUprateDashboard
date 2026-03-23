@@ -14,7 +14,6 @@ export default function MethodologyFooter() {
           The <span style={{fontWeight:700}}>DOE UPRISE program</span> separately targets 5 GW of uprates and restarts by 2029 through federal cost-sharing and streamlined licensing support; this is the program's stated target, not a modeled forecast.
           The plant-level uprate headroom shown on the map is estimated using the DOE methodology (Larsen et al., INL/RPT-23-74681; INL/RPT-24-78810), which applies the highest historically achieved uprate per reactor type as a uniform ceiling — an upper bound, not a forecast.{" "}
           <span style={{fontWeight:700}}>State regulatory classifications</span> reflect conditions as of the FAI Playbook (Nov 2025).
-          California is classified Restricted on the basis of its statutory HLW repository requirement, which remains in force notwithstanding the 2023 Diablo Canyon license extension.
         </div>
         <div style={{fontSize:11, fontStyle:"italic", color:C.warm, marginTop:10}}>
           Industry-standard plant-specific feasibility analysis (per NEI-08-10 and EPRI's 2023 Feasibility Study Guideline) requires vendor-led assessment of each unit's NSSS and BOP constraints.
